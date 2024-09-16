@@ -18,7 +18,7 @@ class PlayerAnimation {
 
         PlayerAnimation(const char* image_path, int frames)
         {
-            
+
             this->animation = LoadImage(image_path);
             this->texture = LoadTextureFromImage(this->animation);
             this->frameWidth = this->texture.width / frames;
@@ -57,15 +57,15 @@ class PlayerAnimation {
 
         }
 
-        int getFrameWidth() const{
+        [[nodiscard]] int getFrameWidth() const{
             return this->frameWidth;
         }
 
-        int getFrameHeight() const{
+        [[nodiscard]] int getFrameHeight() const{
             return this->frameHeight;
         }
 
-        Rectangle getBoundingBox() const {
+        [[nodiscard]] Rectangle getBoundingBox() const {
             return Rectangle{
                 position.x,
                 position.y,
@@ -86,7 +86,7 @@ class PlayerAnimation {
 
 class PlayerAnimation2 : public PlayerAnimation {
     public:
-        PlayerAnimation2(const char* image_path, int frames) : PlayerAnimation(image_path, frames) {
+        PlayerAnimation2(const char* image_path, const int frames) : PlayerAnimation(image_path, frames) {
             this->position = { 800.0f, 240.0f };
         }
 
@@ -114,8 +114,8 @@ class PlayerAnimation2 : public PlayerAnimation {
 };
 
 bool checkCollision(const PlayerAnimation& player1, const PlayerAnimation& player2) {
-    Rectangle rect1 = player1.getBoundingBox();
-    Rectangle rect2 = player2.getBoundingBox();
+    const Rectangle rect1 = player1.getBoundingBox();
+    const Rectangle rect2 = player2.getBoundingBox();
     return CheckCollisionRecs(rect1, rect2);
 }
 
